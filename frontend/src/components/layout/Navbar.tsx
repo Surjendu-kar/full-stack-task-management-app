@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
-import { ShoppingCartIcon } from '@heroicons/react/24/outline';
+import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { FiShoppingCart } from "react-icons/fi";
 
 export default function Navbar() {
   const { isAuthenticated, isAdmin, user, logout } = useAuth();
@@ -14,15 +14,21 @@ export default function Navbar() {
           </Link>
 
           <div className="flex items-center space-x-4">
-            <Link to="/menu" className="hover:text-gray-600">Menu</Link>
+            <Link to="/menu" className="hover:text-gray-600">
+              Menu
+            </Link>
             {isAuthenticated ? (
               <>
                 <Link to="/cart" className="relative">
-                  <ShoppingCartIcon className="h-6 w-6" />
+                  <FiShoppingCart className="h-6 w-6" />
                 </Link>
-                <Link to="/orders" className="hover:text-gray-600">Orders</Link>
+                <Link to="/orders" className="hover:text-gray-600">
+                  Orders
+                </Link>
                 {isAdmin && (
-                  <Link to="/admin" className="hover:text-gray-600">Admin</Link>
+                  <Link to="/admin" className="hover:text-gray-600">
+                    Admin
+                  </Link>
                 )}
                 <span className="text-gray-600">{user}</span>
                 <button
@@ -45,4 +51,4 @@ export default function Navbar() {
       </div>
     </nav>
   );
-} 
+}
