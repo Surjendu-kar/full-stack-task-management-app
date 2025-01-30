@@ -65,7 +65,7 @@ export default function RegisterPage() {
           Already have an account?
           <button
             onClick={() => navigate("/login")}
-            className="ml-2 text-blue-600 hover:underline font-medium cursor-pointer"
+            className="ml-2 text-indigo-600 hover:underline font-medium cursor-pointer"
           >
             Sign in
           </button>
@@ -79,7 +79,7 @@ export default function RegisterPage() {
               type="text"
               {...register("username")}
               placeholder="Username"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
             />
           </div>
           {errors.username && (
@@ -95,7 +95,7 @@ export default function RegisterPage() {
               type={showPassword ? "text" : "password"}
               {...register("password")}
               placeholder="Password"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
             />
             <button
               type="button"
@@ -118,7 +118,7 @@ export default function RegisterPage() {
               type={showConfirmPassword ? "text" : "password"}
               {...register("confirmPassword")}
               placeholder="Confirm Password"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
             />
             <button
               type="button"
@@ -144,7 +144,7 @@ export default function RegisterPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transform transition-transform hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
+          className="w-full py-3 px-4 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transform transition-transform hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
         >
           {isSubmitting ? (
             <span className="flex items-center justify-center">

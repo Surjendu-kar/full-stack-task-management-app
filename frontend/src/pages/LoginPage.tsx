@@ -62,7 +62,7 @@ export default function LoginPage() {
           Don't have an account?
           <button
             onClick={() => navigate("/register")}
-            className="ml-2 text-blue-600 hover:underline font-medium cursor-pointer"
+            className="ml-2 text-indigo-600 hover:underline font-medium cursor-pointer"
           >
             Get started
           </button>
@@ -76,7 +76,7 @@ export default function LoginPage() {
               type="text"
               {...register("username")}
               placeholder="Username"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
             />
           </div>
           {errors.username && (
@@ -92,7 +92,7 @@ export default function LoginPage() {
               type={showPassword ? "text" : "password"}
               {...register("password")}
               placeholder="Password"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
             />
             <button
               type="button"
@@ -114,7 +114,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transform transition-transform hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
+          className="w-full py-3 px-4 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transform transition-transform hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
         >
           {isSubmitting ? (
             <span className="flex items-center justify-center">
