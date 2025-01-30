@@ -56,12 +56,12 @@ export default function Cart() {
     <div className="flex flex-col">
       <h2 className="text-2xl font-bold mb-6">Shopping Cart</h2>
 
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col lg:flex-row gap-10">
         <div className="flex flex-col">
           {items.map((item) => (
             <div
               key={item.menuItem._id}
-              className="flex gap-4 bg-white p-4 rounded-lg w-[700px]"
+              className="flex gap-4 bg-white py-4 rounded-lg w-[700px]"
             >
               {/* Image placeholder - replace with actual image if available */}
               <div className="w-[100px] h-[100px] bg-gray-200 rounded-md flex-shrink-0" />
