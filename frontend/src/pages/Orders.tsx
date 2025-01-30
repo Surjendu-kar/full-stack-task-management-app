@@ -27,13 +27,13 @@ export default function Orders() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div className="flex flex-col">
       <h2 className="text-2xl font-bold mb-6">Your Orders</h2>
-      <div className="space-y-8">
+      <div className="flex flex-wrap gap-8 justify-between">
         {orders.map((order) => (
           <div
             key={order._id}
-            className="bg-white shadow overflow-hidden sm:rounded-lg"
+            className="bg-white shadow overflow-hidden sm:rounded-lg w-[650px]"
           >
             <div className="px-4 py-5 sm:px-6">
               <h3 className="text-lg leading-6 font-medium text-gray-900">

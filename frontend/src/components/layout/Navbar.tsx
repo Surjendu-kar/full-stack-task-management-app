@@ -25,7 +25,7 @@ function Navbar() {
     setAnchorEl(null);
   };
   return (
-    <div className="flex justify-between items-center h-16 shadow-sm max-w-[1536px] mx-auto px-16 mb-16">
+    <div className="flex justify-between items-center h-16 shadow-sm max-w-[1536px] mx-auto px-16">
       {/* Logo */}
       <div>
         <Link to="/" className="flex-shrink-0 flex items-center">
