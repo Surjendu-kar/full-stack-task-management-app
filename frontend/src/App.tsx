@@ -4,6 +4,7 @@ import { CartProvider } from "./context/CartContext";
 import Layout from "./components/layout/Layout";
 import PrivateRoute from "./components/shared/PrivateRoute";
 import AdminRoute from "./components/shared/AdminRoute";
+import PublicRoute from "./components/shared/PublicRoute";
 
 import Home from "./pages/Home";
 import Login from "./pages/LoginPage";
@@ -21,8 +22,22 @@ function App() {
           <Layout>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+              <Route
+                path="/login"
+                element={
+                  <PublicRoute>
+                    <Login />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <PublicRoute>
+                    <Register />
+                  </PublicRoute>
+                }
+              />
               <Route path="/menu" element={<Menu />} />
               <Route path="/cart" element={<Cart />} />
               <Route
