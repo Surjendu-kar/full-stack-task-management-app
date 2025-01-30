@@ -6,13 +6,14 @@ import { useState, useRef, useEffect } from "react";
 
 function Navbar() {
   const { isAuthenticated, isAdmin, user, logout } = useAuth();
-  const { items } = useCart();
+  const { items, clearCart } = useCart();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = () => {
     logout();
+    clearCart();
     navigate("/login");
   };
 
