@@ -3,7 +3,7 @@ import { useCart } from "../context/CartContext";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { FiMinus, FiPlus } from "react-icons/fi";
+import QuantityControls from "../components/shared/QuantityControls";
 
 export default function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
@@ -80,36 +80,15 @@ export default function Menu() {
                   ${item.price}
                 </p>
               </div>
-              {quantity > 0 ? (
-                <div className="mt-4 flex items-center justify-center gap-3 border rounded-md overflow-hidden">
-                  <button
-                    onClick={() => handleQuantityChange(item, quantity - 1)}
-                    className="p-2 hover:bg-gray-100 transition-colors cursor-pointer"
-                  >
-                    <FiMinus />
-                  </button>
-                  <span className="w-8 text-center">{quantity}</span>
-                  <button
-                    onClick={() => handleQuantityChange(item, quantity + 1)}
-                    className="p-2 hover:bg-gray-100 transition-colors cursor-pointer"
-                  >
-                    <FiPlus />
-                  </button>
-                </div>
-              ) : (
-                <button
-                  onClick={() => handleAddToCart(item)}
-                  disabled={!item.availability}
-                  className={`mt-4 w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white cursor-pointer 
-                    ${
-                      item.availability
-                        ? "bg-indigo-600 hover:bg-indigo-700"
-                        : "bg-gray-400 cursor-not-allowed"
-                    }`}
-                >
-                  {item.availability ? "Add to Cart" : "Not Available"}
-                </button>
-              )}
+              <QuantityControls
+                quantity={quantity}
+                onQuantityChange={(newQuantity: number) =>
+                  handleQuantityChange(item, newQuantity)
+                }
+                showAddToCart={true}
+                onAddToCart={() => handleAddToCart(item)}
+                isAvailable={item.availability}
+              />
             </div>
           );
         })}

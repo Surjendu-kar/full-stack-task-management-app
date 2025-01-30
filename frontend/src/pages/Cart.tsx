@@ -1,8 +1,9 @@
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
+import { FiTrash2 } from "react-icons/fi";
 import api from "../services/api";
+import QuantityControls from "../components/shared/QuantityControls";
 
 export default function Cart() {
   const { items, removeItem, updateQuantity, total, clearCart } = useCart();
@@ -81,31 +82,12 @@ export default function Cart() {
 
                 {/* Quantity controls */}
                 <div className="flex justify-between items-center mt-auto">
-                  <div className="flex items-center gap-3 border rounded-md overflow-hidden">
-                    <button
-                      onClick={() =>
-                        handleQuantityChange(
-                          item.menuItem._id,
-                          item.quantity - 1
-                        )
-                      }
-                      className="p-2 hover:bg-gray-100 transition-colors cursor-pointer"
-                    >
-                      <FiMinus />
-                    </button>
-                    <span className="w-8 text-center">{item.quantity}</span>
-                    <button
-                      onClick={() =>
-                        handleQuantityChange(
-                          item.menuItem._id,
-                          item.quantity + 1
-                        )
-                      }
-                      className="p-2 hover:bg-gray-100 transition-colors cursor-pointer"
-                    >
-                      <FiPlus />
-                    </button>
-                  </div>
+                  <QuantityControls
+                    quantity={item.quantity}
+                    onQuantityChange={(newQuantity) =>
+                      handleQuantityChange(item.menuItem._id, newQuantity)
+                    }
+                  />
                   <button
                     onClick={() => removeItem(item.menuItem._id)}
                     className="text-red-400 hover:text-red-600 hover:scale-110 transition-transform duration-300 cursor-pointer"
