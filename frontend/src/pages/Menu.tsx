@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { MenuItem } from "../../public/types";
 import { useCart } from "../context/CartContext";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +10,6 @@ export default function Menu() {
   const { addItem } = useCart();
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     const fetchMenu = async () => {

@@ -5,7 +5,6 @@ import {
   useEffect,
   ReactNode,
 } from "react";
-import { MenuItem, CartItem } from "../../public/types";
 
 interface CartContextType {
   items: CartItem[];

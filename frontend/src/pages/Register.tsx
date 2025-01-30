@@ -5,7 +5,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import api from "../services/api";
-import { RegisterCredentials } from "../../public/types";
 
 const schema = yup
   .object({

@@ -1,4 +1,4 @@
-export interface MenuItem {
+interface MenuItem {
   _id: string;
   name: string;
   category: string;
@@ -6,12 +6,12 @@ export interface MenuItem {
   availability: boolean;
 }
 
-export interface CartItem {
+interface CartItem {
   menuItem: MenuItem;
   quantity: number;
 }
 
-export interface Order {
+interface Order {
   _id: string;
   userId: string;
   items: CartItem[];
@@ -20,11 +20,11 @@ export interface Order {
   createdAt: Date;
 }
 
-export interface LoginCredentials {
+interface LoginCredentials {
   username: string;
   password: string;
 }
 
-export interface RegisterCredentials extends LoginCredentials {
+interface RegisterCredentials extends LoginCredentials {
   confirmPassword: string;
-} 
+}

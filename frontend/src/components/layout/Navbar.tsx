@@ -1,5 +1,5 @@
 import { FiShoppingCart, FiUser } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 import { useState, useRef, useEffect } from "react";
@@ -8,6 +8,7 @@ function Navbar() {
   const { isAuthenticated, isAdmin, user, logout } = useAuth();
   const { items, clearCart } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -35,6 +36,10 @@ function Navbar() {
     };
   }, []);
 
+  const isActivePath = (path: string) => {
+    return location.pathname === path;
+  };
+
   return (
     <div className="flex justify-between items-center h-16 shadow-sm max-w-[1536px] mx-auto px-16 sticky top-0 z-50 bg-white">
       {/* Logo */}
@@ -45,17 +50,21 @@ function Navbar() {
       </div>
 
       {/* Navigation Links */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-6 font-medium">
         <Link
           to="/menu"
-          className="px-4 py-2 hover:bg-gray-100 rounded-md transition-colors"
+          className={` rounded-md transition-colors hover:text-indigo-600 ${
+            isActivePath("/menu") ? "text-indigo-600" : "text-gray-700"
+          }`}
         >
           Menu
         </Link>
         {isAuthenticated && (
           <Link
             to="/orders"
-            className="px-4 py-2 hover:bg-gray-100 rounded-md transition-colors"
+            className={` rounded-md transition-colors hover:text-indigo-600 ${
+              isActivePath("/orders") ? "text-indigo-600" : "text-gray-700"
+            }`}
           >
             Orders
           </Link>
@@ -63,7 +72,9 @@ function Navbar() {
         {isAdmin && (
           <Link
             to="/admin"
-            className="px-4 py-2 hover:bg-gray-100 rounded-md transition-colors"
+            className={` rounded-md transition-colors hover:text-indigo-600 ${
+              isActivePath("/admin") ? "text-indigo-600" : "text-gray-700"
+            }`}
           >
             Admin
           </Link>
@@ -74,7 +85,9 @@ function Navbar() {
         {/* Cart Icon */}
         <Link
           to="/cart"
-          className="relative hover:bg-gray-100 rounded-full p-2"
+          className={`relative p-2 rounded-full transition-colors hover:text-indigo-600 ${
+            isActivePath("/cart") ? "text-indigo-600" : "text-gray-700"
+          }`}
         >
           <FiShoppingCart className="h-6 w-6" />
           {items.length > 0 && (
@@ -89,7 +102,7 @@ function Navbar() {
             {/* User Icon */}
             <button
               onClick={toggleMenu}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
+              className="p-2 rounded-full transition-colors hover:text-indigo-600 text-gray-700"
             >
               <FiUser className="h-6 w-6" />
             </button>
@@ -100,7 +113,7 @@ function Navbar() {
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-indigo-600 cursor-pointer"
                 >
                   Logout
                 </button>

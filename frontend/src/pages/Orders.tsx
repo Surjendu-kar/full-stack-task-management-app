@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
-import { Order } from "../../public/types";
 import dayjs from "dayjs";
 
 export default function Orders() {
