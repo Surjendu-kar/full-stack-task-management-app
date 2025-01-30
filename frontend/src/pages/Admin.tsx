@@ -240,13 +240,13 @@ export default function Admin() {
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
                             onClick={() => handleEdit(item)}
-                            className="text-indigo-600 hover:text-indigo-900 mr-4"
+                            className="text-indigo-600 hover:text-indigo-900 mr-4 cursor-pointer"
                           >
                             Edit
                           </button>
                           <button
                             onClick={() => handleDelete(item._id)}
-                            className="text-red-600 hover:text-red-900"
+                            className="text-red-600 hover:text-red-900 cursor-pointer"
                           >
                             Delete
                           </button>

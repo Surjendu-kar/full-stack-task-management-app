@@ -53,10 +53,11 @@ export default function Cart() {
   }
 
   return (
-    <div className="flex flex-col">
-      <h2 className="text-2xl font-bold mb-6">Shopping Cart</h2>
+    <div className="flex flex-col lg:flex-row gap-10 justify-between">
+      <div className="flex flex-col">
+        <h2 className="text-2xl font-bold mb-6">Shopping Cart</h2>
 
-      <div className="flex flex-col lg:flex-row gap-10">
+        {/* Cart Items */}
         <div className="flex flex-col">
           {items.map((item) => (
             <div
@@ -99,16 +100,42 @@ export default function Cart() {
             </div>
           ))}
         </div>
+      </div>
 
-        {/* Total and Checkout */}
-        <div className="flex flex-col flex-1 bg-white p-4 rounded-lg">
-          <div className="flex justify-between text-xl font-bold">
-            <p>Total</p>
+      {/* Total and Checkout */}
+      <div className="flex flex-col bg-white px-6 w-[500px] gap-4">
+        {/* Order Summary */}
+        <h2 className="text-lg font-bold">ORDER SUMMARY</h2>
+
+        {/* Order Summary Items */}
+        <div className="flex flex-col gap-4">
+          <div className="flex justify-between text-gray-600">
+            <p>{items.length} items</p>
             <p>${total.toFixed(2)}</p>
           </div>
+
+          <div className="flex justify-between text-gray-600">
+            <p>Total Savings</p>
+            <p className="text-red-500">-$2.00</p>
+          </div>
+
+          <div className="flex justify-between text-gray-600">
+            <p>Shipping</p>
+            <p className="uppercase">Free</p>
+          </div>
+
+          {/* Total */}
+          <div className="pt-4 border-t border-gray-200">
+            <div className="flex justify-between font-bold text-lg">
+              <p>Total (Inc. GST)</p>
+              <p>${(total - 2).toFixed(2)}</p>
+            </div>
+          </div>
+          
+          {/* Checkout Button */}
           <button
             onClick={handleCheckout}
-            className="mt-4 w-full bg-indigo-600 text-white rounded-md py-3 px-8 font-medium hover:bg-indigo-700 transition-colors duration-300 cursor-pointer"
+            className="w-full bg-black text-white rounded-md py-3 px-8 font-medium hover:bg-gray-800 transition-colors duration-300 cursor-pointer"
           >
             Checkout
           </button>
