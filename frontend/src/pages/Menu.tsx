@@ -47,7 +47,9 @@ export default function Menu() {
             </div>
             <div className="mt-4 flex justify-between">
               <div className="flex flex-col">
-                <h3 className="text-sm text-gray-700">{item.name}</h3>
+                <h3 className="text-sm text-gray-900 capitalize font-medium">
+                  {item.name}
+                </h3>
                 <p className="mt-1 text-sm text-gray-500">{item.category}</p>
               </div>
               <p className="text-sm font-medium text-gray-900">${item.price}</p>
@@ -55,7 +57,7 @@ export default function Menu() {
             <button
               onClick={() => handleAddToCart(item)}
               disabled={!item.availability}
-              className={`mt-4 w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white 
+              className={`mt-4 w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white cursor-pointer 
                 ${
                   item.availability
                     ? "bg-indigo-600 hover:bg-indigo-700"

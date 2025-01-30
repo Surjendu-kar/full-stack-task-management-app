@@ -9,7 +9,10 @@ export default function Cart() {
   const navigate = useNavigate();
 
   const handleQuantityChange = (menuItemId: string, quantity: number) => {
-    if (quantity < 1) return;
+    if (quantity < 1) {
+      removeItem(menuItemId);
+      return;
+    }
     updateQuantity(menuItemId, quantity);
   };
 
@@ -71,7 +74,7 @@ export default function Cart() {
                 onClick={() =>
                   handleQuantityChange(item.menuItem._id, item.quantity - 1)
                 }
-                className="px-2 py-1 border rounded-l"
+                className="px-2 py-1 border rounded-l cursor-pointer hover:scale-105 transition-all duration-300"
               >
                 -
               </button>
@@ -82,13 +85,13 @@ export default function Cart() {
                 onClick={() =>
                   handleQuantityChange(item.menuItem._id, item.quantity + 1)
                 }
-                className="px-2 py-1 border rounded-r"
+                className="px-2 py-1 border rounded-r cursor-pointer hover:scale-105 transition-all duration-300"
               >
                 +
               </button>
               <button
                 onClick={() => removeItem(item.menuItem._id)}
-                className="ml-4 text-red-600 hover:text-red-800"
+                className="ml-4 text-red-600 hover:text-red-800 cursor-pointer"
               >
                 Remove
               </button>
