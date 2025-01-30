@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { Order } from "../../public/types";
 import dayjs from "dayjs";
@@ -6,6 +7,7 @@ import dayjs from "dayjs";
 export default function Orders() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -24,6 +26,20 @@ export default function Orders() {
 
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (orders.length === 0) {
+    return (
+      <div className="text-center py-10 bg-white rounded-lg">
+        <p className="text-gray-500">You haven't placed any orders yet</p>
+        <button
+          onClick={() => navigate("/menu")}
+          className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300 cursor-pointer"
+        >
+          Order Now
+        </button>
+      </div>
+    );
   }
 
   return (

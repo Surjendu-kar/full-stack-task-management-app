@@ -2,11 +2,16 @@ import { useState, useEffect } from "react";
 import { MenuItem } from "../../public/types";
 import { useCart } from "../context/CartContext";
 import api from "../services/api";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
   const { addItem } = useCart();
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -24,6 +29,10 @@ export default function Menu() {
   }, []);
 
   const handleAddToCart = (menuItem: MenuItem) => {
+    if (!isAuthenticated) {
+      navigate("/login");
+      return null;
+    }
     addItem(menuItem, 1);
   };
 
