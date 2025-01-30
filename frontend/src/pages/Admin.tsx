@@ -71,13 +71,9 @@ export default function Admin() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div className="flex flex-col">
       <div className="md:grid md:grid-cols-3 md:gap-6">
-        <div className="md:col-span-1">
-          <h3 className="text-lg font-medium leading-6 text-gray-900">
-            {editingItem ? "Edit Menu Item" : "Add Menu Item"}
-          </h3>
-        </div>
+       
         <div className="mt-5 md:mt-0 md:col-span-2">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="shadow sm:rounded-md sm:overflow-hidden">

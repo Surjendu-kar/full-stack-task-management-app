@@ -74,7 +74,7 @@ export default function Menu() {
               {/* Name and Category */}
               <div className="my-4 flex justify-between">
                 <div className="flex flex-col">
-                  <h3 className="text-sm text-gray-900 capitalize font-medium">
+                  <h3 className="text-md text-gray-900 capitalize font-medium">
                     {item.name}
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">{item.category}</p>
