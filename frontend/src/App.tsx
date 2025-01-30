@@ -5,7 +5,6 @@ import Layout from "./components/layout/Layout";
 import PrivateRoute from "./components/shared/PrivateRoute";
 import AdminRoute from "./components/shared/AdminRoute";
 
-// Import pages (we'll create these next)
 import Home from "./pages/Home";
 import Login from "./pages/LoginPage";
 import Register from "./pages/Register";
