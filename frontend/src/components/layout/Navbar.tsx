@@ -102,7 +102,7 @@ function Navbar() {
             {/* User Icon */}
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-full transition-colors hover:text-indigo-600 text-gray-700"
+              className="p-2 rounded-full transition-colors hover:text-indigo-600 text-gray-700 cursor-pointer"
             >
               <FiUser className="h-6 w-6" />
             </button>

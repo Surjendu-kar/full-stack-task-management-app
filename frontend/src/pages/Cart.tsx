@@ -101,7 +101,7 @@ export default function Cart() {
                           item.quantity + 1
                         )
                       }
-                      className="p-2 hover:bg-blue-600 hover:text-white transition-all duration-300 cursor-pointer"
+                      className="p-2 hover:bg-gray-100 transition-colors cursor-pointer"
                     >
                       <FiPlus />
                     </button>
