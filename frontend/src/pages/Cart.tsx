@@ -1,6 +1,7 @@
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
 import api from "../services/api";
 
 export default function Cart() {
@@ -38,11 +39,11 @@ export default function Cart() {
 
   if (items.length === 0) {
     return (
-      <div className="text-center py-12">
-        <h2 className="text-2xl font-bold text-gray-900">Your cart is empty</h2>
+      <div className="text-center py-10 bg-white rounded-lg">
+        <p className="text-gray-500">Your cart is empty</p>
         <button
           onClick={() => navigate("/menu")}
-          className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+          className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300"
         >
           View Menu
         </button>
@@ -51,61 +52,81 @@ export default function Cart() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto py-8 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-      <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
-        Shopping Cart
-      </h2>
-      <div className="mt-8">
-        {items.map((item) => (
-          <div
-            key={item.menuItem._id}
-            className="flex items-center justify-between py-4 border-b"
-          >
-            <div className="flex-1">
-              <h3 className="text-lg font-medium text-gray-900">
-                {item.menuItem.name}
-              </h3>
-              <p className="mt-1 text-sm text-gray-500">
-                ${item.menuItem.price}
-              </p>
+    <div className="flex flex-col">
+      <h2 className="text-2xl font-bold mb-6">Shopping Cart</h2>
+
+      <div className="flex flex-col lg:flex-row">
+        <div className="flex flex-col">
+          {items.map((item) => (
+            <div
+              key={item.menuItem._id}
+              className="flex gap-4 bg-white p-4 rounded-lg w-[700px]"
+            >
+              {/* Image placeholder - replace with actual image if available */}
+              <div className="w-[100px] h-[100px] bg-gray-200 rounded-md flex-shrink-0" />
+
+              <div className="flex flex-col flex-grow gap-2">
+                {/* Item details */}
+                <div className="flex justify-between">
+                  <div>
+                    <p className="font-bold capitalize">{item.menuItem.name}</p>
+                    <p className="text-gray-500 text-sm">
+                      ${item.menuItem.price.toFixed(2)} each
+                    </p>
+                  </div>
+                  <p className="font-bold">
+                    ${(item.menuItem.price * item.quantity).toFixed(2)}
+                  </p>
+                </div>
+
+                {/* Quantity controls */}
+                <div className="flex justify-between items-center mt-auto">
+                  <div className="flex items-center gap-3 border rounded-md overflow-hidden">
+                    <button
+                      onClick={() =>
+                        handleQuantityChange(
+                          item.menuItem._id,
+                          item.quantity - 1
+                        )
+                      }
+                      className="p-2 hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <FiMinus />
+                    </button>
+                    <span className="w-8 text-center">{item.quantity}</span>
+                    <button
+                      onClick={() =>
+                        handleQuantityChange(
+                          item.menuItem._id,
+                          item.quantity + 1
+                        )
+                      }
+                      className="p-2 hover:bg-blue-600 hover:text-white transition-all duration-300 cursor-pointer"
+                    >
+                      <FiPlus />
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => removeItem(item.menuItem._id)}
+                    className="text-red-400 hover:text-red-600 hover:scale-110 transition-transform duration-300 cursor-pointer"
+                  >
+                    <FiTrash2 size={20} />
+                  </button>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center">
-              <button
-                onClick={() =>
-                  handleQuantityChange(item.menuItem._id, item.quantity - 1)
-                }
-                className="px-2 py-1 border rounded-l cursor-pointer hover:scale-105 transition-all duration-300"
-              >
-                -
-              </button>
-              <span className="px-4 py-1 border-t border-b">
-                {item.quantity}
-              </span>
-              <button
-                onClick={() =>
-                  handleQuantityChange(item.menuItem._id, item.quantity + 1)
-                }
-                className="px-2 py-1 border rounded-r cursor-pointer hover:scale-105 transition-all duration-300"
-              >
-                +
-              </button>
-              <button
-                onClick={() => removeItem(item.menuItem._id)}
-                className="ml-4 text-red-600 hover:text-red-800 cursor-pointer"
-              >
-                Remove
-              </button>
-            </div>
-          </div>
-        ))}
-        <div className="mt-8">
-          <div className="flex justify-between text-xl font-medium text-gray-900">
+          ))}
+        </div>
+
+        {/* Total and Checkout */}
+        <div className="flex flex-col flex-1 bg-white p-4 rounded-lg">
+          <div className="flex justify-between text-xl font-bold">
             <p>Total</p>
             <p>${total.toFixed(2)}</p>
           </div>
           <button
             onClick={handleCheckout}
-            className="mt-8 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 text-base font-medium text-white hover:bg-indigo-700"
+            className="mt-4 w-full bg-blue-600 text-white rounded-md py-3 px-8 font-medium hover:bg-blue-700 transition-colors duration-300 cursor-pointer"
           >
             Checkout
           </button>
