@@ -3,7 +3,7 @@ import { useCart } from "../context/CartContext";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import QuantityControls from "../components/shared/QuantityControls";
+import QuantityControls from "../components/QuantityControls";
 
 export default function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);

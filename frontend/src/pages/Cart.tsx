@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { FiTrash2 } from "react-icons/fi";
 import api from "../services/api";
-import QuantityControls from "../components/shared/QuantityControls";
+import QuantityControls from "../components/QuantityControls";
 
 export default function Cart() {
   const { items, removeItem, updateQuantity, total, clearCart } = useCart();
@@ -131,7 +131,7 @@ export default function Cart() {
               <p>${(total - 2).toFixed(2)}</p>
             </div>
           </div>
-          
+
           {/* Checkout Button */}
           <button
             onClick={handleCheckout}
