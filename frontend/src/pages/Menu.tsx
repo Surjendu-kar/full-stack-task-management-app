@@ -64,12 +64,15 @@ export default function Menu() {
 
           return (
             <div key={item._id} className="group relative w-full">
+              {/* Image */}
               <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
                 <div className="w-full h-full flex items-center justify-center">
                   <span className="text-xl">{item.name}</span>
                 </div>
               </div>
-              <div className="mt-4 flex justify-between">
+
+              {/* Name and Category */}
+              <div className="my-4 flex justify-between">
                 <div className="flex flex-col">
                   <h3 className="text-sm text-gray-900 capitalize font-medium">
                     {item.name}
@@ -80,6 +83,8 @@ export default function Menu() {
                   ${item.price}
                 </p>
               </div>
+
+              {/* Quantity Controls */}
               <QuantityControls
                 quantity={quantity}
                 onQuantityChange={(newQuantity: number) =>

@@ -108,7 +108,7 @@ export default function Cart() {
           </div>
           <button
             onClick={handleCheckout}
-            className="mt-4 w-full bg-blue-600 text-white rounded-md py-3 px-8 font-medium hover:bg-blue-700 transition-colors duration-300 cursor-pointer"
+            className="mt-4 w-full bg-indigo-600 text-white rounded-md py-3 px-8 font-medium hover:bg-indigo-700 transition-colors duration-300 cursor-pointer"
           >
             Checkout
           </button>
