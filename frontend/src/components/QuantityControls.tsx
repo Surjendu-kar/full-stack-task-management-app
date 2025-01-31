@@ -39,10 +39,10 @@ export default function QuantityControls({
     <button
       onClick={onAddToCart}
       disabled={!isAvailable}
-      className={`w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white cursor-pointer 
+      className={`w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white 
         ${
           isAvailable
-            ? "bg-indigo-600 hover:bg-indigo-700"
+            ? "bg-indigo-600 hover:bg-indigo-700 cursor-pointer "
             : "bg-gray-400 cursor-not-allowed"
         }`}
     >

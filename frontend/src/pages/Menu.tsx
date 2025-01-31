@@ -4,20 +4,38 @@ import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import QuantityControls from "../components/QuantityControls";
+import { FiSearch } from "react-icons/fi";
 
 export default function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const { addItem, items, updateQuantity, removeItem } = useCart();
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
+  // Add debounce effect
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const response = await api.get("/menu");
-        setMenuItems(response.data);
+        const { data } = await api.get("/menu", {
+          params: {
+            category: selectedCategory === "all" ? undefined : selectedCategory,
+            ...(debouncedSearchQuery && { search: debouncedSearchQuery }),
+          },
+        });
+        setMenuItems(data?.items ?? []);
       } catch (error) {
         console.error("Error fetching menu:", error);
       } finally {
@@ -25,18 +43,19 @@ export default function Menu() {
       }
     };
 
+    const fetchCategories = async () => {
+      try {
+        const response = await api.get("/categories");
+        setCategories([{ _id: "all", name: "All" }, ...response.data]);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+
     fetchMenu();
-  }, []);
-
-  const categories = [
-    "All",
-    ...new Set(menuItems.map((item) => item.category)),
-  ];
-
-  const filteredMenuItems =
-    selectedCategory === "All"
-      ? menuItems
-      : menuItems.filter((item) => item.category === selectedCategory);
+  }, [debouncedSearchQuery, selectedCategory]);
 
   const handleAddToCart = (menuItem: MenuItem) => {
     if (!isAuthenticated) {
@@ -63,10 +82,6 @@ export default function Menu() {
     return <div>Loading...</div>;
   }
 
-  if (menuItems.length === 0) {
-    return <div>No menu items found</div>;
-  }
-
   return (
     <div className="flex gap-6">
       {/* Category Sidebar */}
@@ -75,24 +90,39 @@ export default function Menu() {
         <div className="flex flex-col gap-2">
           {categories.map((category) => (
             <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
+              key={category._id}
+              onClick={() => setSelectedCategory(category._id)}
               className={`px-4 py-2 text-left rounded-md transition-colors cursor-pointer ${
-                selectedCategory === category
+                selectedCategory === category._id
                   ? "bg-indigo-100 text-indigo-700 font-medium"
                   : "hover:bg-gray-100"
               }`}
             >
-              {category}
+              {category.name}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Menu Grid */}
+      {/* Menu Content */}
       <div className="flex-1">
+        {/* Search Bar */}
+        <div className="mb-6 relative">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search menu items..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full px-4 py-2 pl-10 pr-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            />
+            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          </div>
+        </div>
+
+        {/* Menu Grid */}
         <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-          {filteredMenuItems.map((item) => {
+          {menuItems.map((item) => {
             const quantity = getItemQuantity(item._id);
 
             return (
@@ -111,7 +141,7 @@ export default function Menu() {
                       {item.name}
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">
-                      {item.category}
+                      {item.category.name}
                     </p>
                   </div>
                   <p className="text-sm font-medium text-gray-900">
@@ -133,6 +163,13 @@ export default function Menu() {
             );
           })}
         </div>
+
+        {/* No Results Message */}
+        {!menuItems.length && (
+          <div className="text-center py-10">
+            <p className="text-gray-500">No menu items found.</p>
+          </div>
+        )}
       </div>
     </div>
   );

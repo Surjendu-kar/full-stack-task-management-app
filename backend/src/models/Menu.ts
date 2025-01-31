@@ -1,8 +1,8 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from "mongoose";
 
 export interface IMenuItem extends Document {
   name: string;
-  category: string;
+  category: mongoose.Types.ObjectId;
   price: number;
   availability: boolean;
 }
@@ -13,9 +13,9 @@ const menuSchema = new Schema({
     required: true,
   },
   category: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "Category",
     required: true,
-    enum: ['Appetizers', 'Main Course', 'Desserts', 'Beverages'],
   },
   price: {
     type: Number,
@@ -27,4 +27,4 @@ const menuSchema = new Schema({
   },
 });
 
-export const Menu = mongoose.model<IMenuItem>('Menu', menuSchema); 
+export const Menu = mongoose.model<IMenuItem>("Menu", menuSchema);

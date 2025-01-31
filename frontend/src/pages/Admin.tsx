@@ -18,6 +18,7 @@ const schema = yup
 
 export default function Admin() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
   const {
     register,
@@ -30,14 +31,24 @@ export default function Admin() {
 
   useEffect(() => {
     fetchMenuItems();
+    fetchCategories();
   }, []);
 
   const fetchMenuItems = async () => {
     try {
       const response = await api.get("/menu");
-      setMenuItems(response.data);
+      setMenuItems(response.data.items ?? []);
     } catch (error) {
       console.error("Error fetching menu items:", error);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const response = await api.get("/categories");
+      setCategories(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
     }
   };
 
@@ -73,7 +84,6 @@ export default function Admin() {
   return (
     <div className="flex flex-col">
       <div className="md:grid md:grid-cols-3 md:gap-6">
-       
         <div className="mt-5 md:mt-0 md:col-span-2">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="shadow sm:rounded-md sm:overflow-hidden">
@@ -103,10 +113,12 @@ export default function Admin() {
                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   >
                     <option value="">Select category</option>
-                    <option value="Appetizers">Appetizers</option>
-                    <option value="Main Course">Main Course</option>
-                    <option value="Desserts">Desserts</option>
-                    <option value="Beverages">Beverages</option>
+
+                    {categories.map((category) => (
+                      <option key={category._id} value={category._id}>
+                        {category.name}
+                      </option>
+                    ))}
                   </select>
                   {errors.category && (
                     <p className="mt-1 text-sm text-red-600">
@@ -217,7 +229,7 @@ export default function Admin() {
                           {item.name}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {item.category}
+                          {item.category.name}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           ${item.price}

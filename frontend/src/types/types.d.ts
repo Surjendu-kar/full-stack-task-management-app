@@ -1,7 +1,12 @@
+interface Category {
+  _id: string;
+  name: string;
+}
+
 interface MenuItem {
   _id: string;
   name: string;
-  category: string;
+  category: Category;
   price: number;
   availability: boolean;
 }
