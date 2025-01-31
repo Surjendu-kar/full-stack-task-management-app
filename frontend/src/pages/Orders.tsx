@@ -42,13 +42,13 @@ export default function Orders() {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col items-center">
       <h2 className="text-2xl font-bold mb-6">Your Orders</h2>
-      <div className="flex flex-wrap gap-8 justify-between">
+      <div className="flex flex-col gap-8 justify-between">
         {orders.map((order) => (
           <div
             key={order._id}
-            className="bg-white shadow overflow-hidden sm:rounded-lg w-[650px]"
+            className="bg-white shadow overflow-hidden sm:rounded-lg w-[800px]"
           >
             <div className="px-4 py-5 sm:px-6">
               <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -61,29 +61,30 @@ export default function Orders() {
                 Status: <span className="font-medium">{order.status}</span>
               </p>
             </div>
-            <div className="border-t border-gray-200">
-              <dl>
-                {order.items.map((item) => (
-                  <div
-                    key={item.menuItem._id}
-                    className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
-                  >
-                    <dt className="text-sm font-medium text-gray-500">
-                      {item.menuItem.name}
-                    </dt>
-                    <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                      {item.quantity} x ${item.menuItem.price} = $
-                      {item.quantity * item.menuItem.price}
-                    </dd>
-                  </div>
-                ))}
-                <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 bg-gray-50">
-                  <dt className="text-sm font-medium text-gray-500">Total</dt>
-                  <dd className="mt-1 text-sm font-medium text-gray-900 sm:mt-0 sm:col-span-2">
-                    ${order.totalAmount}
-                  </dd>
+
+            <div className="flex flex-col border-t border-gray-200">
+              {order.items.map((item) => (
+                // item & price
+                <div
+                  key={item.menuItem._id}
+                  className="px-4 py-3 flex justify-between"
+                >
+                  <p className="text-sm font-medium text-black capitalize">
+                    {item.menuItem.name}
+                  </p>
+                  <p className=" text-sm text-black font-medium">
+                    {item.quantity} x ${item.menuItem.price} = $
+                    {item.quantity * item.menuItem.price}
+                  </p>
                 </div>
-              </dl>
+              ))}
+              {/* total */}
+              <div className="px-4 py-3 flex justify-between bg-gray-50">
+                <p className="text-sm font-medium text-black">Total</p>
+                <p className=" text-sm font-medium text-black">
+                  ${order.totalAmount}
+                </p>
+              </div>
             </div>
           </div>
         ))}

@@ -41,7 +41,7 @@ function Navbar() {
   };
 
   return (
-    <div className="flex justify-between items-center h-16 shadow-sm max-w-[1536px] mx-auto px-16 sticky top-0 z-50 bg-white">
+    <div className="flex justify-between items-center h-16 shadow-sm max-w-[1536px] mx-auto px-8 sticky top-0 z-50 bg-white">
       {/* Logo */}
       <div className="flex items-center hover:scale-105 transition-all duration-300">
         <Link to="/">
