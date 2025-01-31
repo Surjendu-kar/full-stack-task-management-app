@@ -114,28 +114,18 @@ export default function Cart() {
             <p>${total.toFixed(2)}</p>
           </div>
 
-          <div className="flex justify-between text-gray-600">
-            <p>Total Savings</p>
-            <p className="text-red-500">-$2.00</p>
-          </div>
-
-          <div className="flex justify-between text-gray-600">
-            <p>Shipping</p>
-            <p className="uppercase">Free</p>
-          </div>
-
           {/* Total */}
           <div className="pt-4 border-t border-gray-200">
             <div className="flex justify-between font-bold text-lg">
-              <p>Total (Inc. GST)</p>
-              <p>${(total - 2).toFixed(2)}</p>
+              <p>Total</p>
+              <p>${total}</p>
             </div>
           </div>
 
           {/* Checkout Button */}
           <button
             onClick={handleCheckout}
-            className="w-full bg-black text-white rounded-md py-3 px-8 font-medium hover:bg-gray-800 transition-colors duration-300 cursor-pointer"
+            className="w-full bg-indigo-600 text-white rounded-md py-3 px-8 font-medium hover:bg-indigo-700 transition-colors duration-300 cursor-pointer"
           >
             Checkout
           </button>
